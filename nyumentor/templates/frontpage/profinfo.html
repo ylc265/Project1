@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>NYU mentor</title>
+	</head>
+	
+	<body>
+		<h1>Welcome</h1>
+		{% if courses %}
+			<ul>
+				{% for course in courses %}
+				<li> {{ course.coursenumber }} {{ course.coursename }} {{ course.professor }}</li>
+				{% endfor %}
+			</ul>
+		{% else %}
+			<strong>This professor does not exist</strong>
+		{% endif %}
+	</body>
+</html>

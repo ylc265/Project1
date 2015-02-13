@@ -1,0 +1,22 @@
+<! DOCTYPE html>
+<html>
+	<head>
+		<title>NYU Mentor</title>
+	</head>
+
+	<body>
+		<h1>Welcome</h1>
+
+		{% if courses %}
+			<ul>
+				{% for course in courses %}
+				<li><a href="/frontpage/courses/{{ course.slug }}"> {{ course.coursenumber }}</a> {{ course.coursename }}
+					<a href="/frontpage/professors/{{ course.prof_slug }}"> {{ course.professor }} </a></li>
+				{% endfor %}
+			</ul>
+		{% else %}
+			<strong> There are no course listed. </strong>
+		{% endif %}
+
+	</body>
+</html>

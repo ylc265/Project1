@@ -1,0 +1,21 @@
+<! DOCTYPE html>
+<html>
+	<head>
+		<title>NYU Mentor</title>
+	</head>
+
+	<body>
+		<h1>Welcome</h1>
+
+		{% if professors %}
+			<ul>
+				{% for prof in professors %}
+				<li> {{ prof.professor }} </li>
+				{% endfor %}
+			</ul>
+		{% else %}
+			<strong> There are no course listed. </strong>
+		{% endif %}
+
+	</body>
+</html>
