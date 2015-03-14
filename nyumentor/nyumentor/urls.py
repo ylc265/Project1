@@ -8,4 +8,6 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^frontpage/', include('frontpage.urls')),
+    url(r'^frontpage_users/', include('frontpage_users.urls')),
+    url(r'^accounts/', include('registration.backends.simple.urls')),
 )

@@ -1,11 +1,15 @@
-<! DOCTYPE html>
-<html>
-	<head>
-		<title>NYU Mentor</title>
-	</head>
+{% extends 'base.html' %}
 
-	<body>
-		<h1>Welcome</h1>
+{% load staticfiles %}
+
+{% block title %} Home Page {% endblock %}
+
+{% block content %}
+
+<h1>Welcome</h1>
+		{% if user.is_authenticated %}
+		<h1> Hello {{ user.username }}! </h1>
+		{% endif %}
 
 		{% if courses %}
 			<ul>
@@ -17,6 +21,4 @@
 		{% else %}
 			<strong> There are no course listed. </strong>
 		{% endif %}
-
-	</body>
-</html>
+{% endblock %}

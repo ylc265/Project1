@@ -37,6 +37,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'frontpage',
+    'frontpage_users',
+    'registration',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -91,3 +93,18 @@ TEMPLATE_PATH = os.path.join(BASE_DIR, 'templates')
 TEMPLATE_DIRS = [
     TEMPLATE_PATH,
 ]
+
+# EMAIL SETTING fro gmail or google apps
+EMAIL_USE_TLS = False
+EMAIL_HOST = 'localhost'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_PORT = 1025
+DEFAULT_FROM_EMAIL = 'testing@example.com'
+
+# Registration Redux Settings
+REGISTRATION_OPEN = True 
+ACCOUNT_ACTIVATION_DAYS = 7
+REGISTRATION_AUTO_LOGIN = False
+LOGIN_REDIRECT_URL = '/frontpage/'
+LOGIN_URL = '/accounts/login/'

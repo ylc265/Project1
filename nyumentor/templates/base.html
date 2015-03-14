@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html>
+	<head lang="en">
+		<meta charset="UTF-8">
+		<title>NYU Mentor - {% block title %} Frontpage {% endblock %}</title>
+	</head>
+
+	<body>
+		<div>
+			{% block content %}{% endblock %}
+		</div>
+		<hr />
+		<div>
+			<ul>
+				{% if user.is_authenticated %}
+					<li><a href="{% url 'auth_logout' %}">Logout</a></li>
+					<li><a href="{% url 'add_course'%}">Add a New Course</a></li>
+				{% else %}
+					<li><a href="{% url 'register' %}">Register Here</a></li>
+					<li><a href="{% url 'auth_login' %}">Login</a></li>
+				{% endif %}
+			</ul>
+		</div>
+	</body>
+</html>
+	</body>
+</html>

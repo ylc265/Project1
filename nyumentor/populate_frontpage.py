@@ -7,31 +7,32 @@ django.setup()
 from frontpage.models import CourseModel, Category
 
 def populate():
-	help_populate('MAP', 'Whatever', 'MAP_UA 101', 'Bullshit')
-	help_populate('MATH', 'Cheegar', 'MATH_UA 121', 'Calculus I')
-	help_populate('MATH', 'Seline', 'MATH_UA 122', 'Calculus II')
-	help_populate('MATH', 'Bertow', 'MATH_UA 123', 'Calculus III')
+	help_populate('MAP', 'Whatever', 'MAP_UA 101', 'Bullshit', 'A')
+	help_populate('MATH', 'Cheegar', 'MATH_UA 121', 'Calculus I', 'B')
+	help_populate('MATH', 'Seline', 'MATH_UA 122', 'Calculus II', 'C')
+	help_populate('MATH', 'Bertow', 'MATH_UA 123', 'Calculus III', 'D')
 
-	help_populate('ENG', 'Stein', 'ENG_UA 121', 'English I')
-	help_populate('ENG', 'Seline', 'ENG_UA 122', 'English II')
-	help_populate('ENG', 'Seline', 'ENG_UA 123', 'English III')
+	help_populate('ENG', 'Stein', 'ENG_UA 121', 'English I', 'A-')
+	help_populate('ENG', 'Seline', 'ENG_UA 122', 'English II', 'B+')
+	help_populate('ENG', 'Seline', 'ENG_UA 123', 'English III', 'A')
 
-	help_populate('CS', 'Davis', 'CS_UA 121', 'DS')
-	help_populate('CS', 'Siegel', 'CS_UA 121', 'Algo')
-	help_populate('CS', 'Bernstein', 'CS_UA 123', 'Algo')
+	help_populate('CS', 'Davis', 'CS_UA 121', 'DS', 'A')
+	help_populate('CS', 'Siegel', 'CS_UA 121', 'Algo', 'B')
+	help_populate('CS', 'Bernstein', 'CS_UA 123', 'Algo', 'C')
+	help_populate('CS', 'Davis', 'CS_UA 121', 'DS', 'B')
 
-def help_populate(catname, profname, cnumname, cnamename):
+def help_populate(catname, profname, cnumname, cnamename, coursegrade):
 	cat = add_cat(catname)
 	add_course(cat = cat, cnum = cnumname,
-		prof = profname, cname = cnamename)
+		prof = profname, cname = cnamename, cgrade = coursegrade)
 
 def add_cat(name):
 	c = Category.objects.get_or_create(name=name)[0]
 	return c 
 
-def add_course(cat, cnum, prof, cname):
+def add_course(cat, cnum, prof, cname, cgrade):
 	ac = CourseModel.objects.get_or_create(category = cat, coursenumber = cnum,
-		professor = prof, coursename = cname)[0]
+		professor = prof, coursename = cname, coursegrade = cgrade)[0]
 	
 	ac.save()
 	return ac

@@ -35,17 +35,31 @@ class CourseName(models.Model):
 		return self.name 
 '''
 class CourseModel(models.Model):
+	GRADE_CHOICES = (
+		('A', 'A'),
+		('A-', 'A-'),
+		('B+', 'B+'),
+		('B', 'B'),
+		('B-', 'B-'),
+		('C+', 'C+'),
+		('C', 'C'),
+		('C-', 'C-'),
+		('D+', 'D+'),
+		('D', 'D'),
+		('F', 'F'))
 	category     = models.ForeignKey(Category)
 	coursenumber = models.CharField(max_length=128)
 	professor    = models.CharField(max_length=128)
 	coursename   = models.CharField(max_length=128)
-	slug = models.SlugField(unique=True)
+	slug = models.SlugField()
 	prof_slug = models.SlugField()
+	coursegrade  = models.CharField(max_length=128,
+		choices=GRADE_CHOICES)
+	# !!! I need one more field here for Fall/Spring year taken 
+
 
 	def save(self, *args, **kwargs):
 		self.slug = '{}-{}'.format(slugify(self.coursenumber), slugify(self.professor))
 		self.prof_slug = slugify(self.professor)
 		super(CourseModel, self).save(*args, **kwargs)
-	class Meta:
-		unique_together = (('coursenumber', 'professor'),)
 

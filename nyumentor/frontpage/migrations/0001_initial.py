@@ -13,8 +13,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Category',
             fields=[
-                ('id', models.AutoField(auto_created=True, serialize=False, primary_key=True, verbose_name='ID')),
-                ('name', models.CharField(choices=[('MATH', 'Math'), ('ENG', 'English'), ('CS', 'Computer Science')], max_length=128, unique=True)),
+                ('id', models.AutoField(verbose_name='ID', auto_created=True, primary_key=True, serialize=False)),
+                ('name', models.CharField(unique=True, max_length=128, choices=[('MATH', 'Math'), ('ENG', 'English'), ('CS', 'Computer Science')])),
             ],
             options={
             },
@@ -23,7 +23,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='CourseModel',
             fields=[
-                ('id', models.AutoField(auto_created=True, serialize=False, primary_key=True, verbose_name='ID')),
+                ('id', models.AutoField(verbose_name='ID', auto_created=True, primary_key=True, serialize=False)),
+                ('coursegrade', models.CharField(max_length=128, choices=[('A', 'A'), ('A-', 'A-'), ('B+', 'B+'), ('B', 'B'), ('B-', 'B-'), ('C+', 'C+'), ('C', 'C'), ('C-', 'C-'), ('D+', 'D+'), ('D', 'D'), ('F', 'F')])),
                 ('coursenumber', models.CharField(max_length=128)),
                 ('professor', models.CharField(max_length=128)),
                 ('coursename', models.CharField(max_length=128)),
@@ -34,9 +35,5 @@ class Migration(migrations.Migration):
             options={
             },
             bases=(models.Model,),
-        ),
-        migrations.AlterUniqueTogether(
-            name='coursemodel',
-            unique_together=set([('coursenumber', 'professor')]),
         ),
     ]
