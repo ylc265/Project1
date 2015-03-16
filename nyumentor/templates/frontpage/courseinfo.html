@@ -5,10 +5,14 @@
 	</head>
 	
 	<body>
-		{% if course %}
+		{% if courses %}
+			{% for course in courses %}
 			<h1>{{ course.coursename }}</h1>
 			<h2>{{ course.coursenumber }}</h2>
 			<h2>{{ course.professor }}</h2>
+			<h2>{{ course.coursegrade}}</h2>
+			<h2>{{ course.course_user }}</h2>
+			{% endfor %}
 		<!-- Remember to add user info here -->
 		{% else %}
 			<strong>This course does not exist</strong>

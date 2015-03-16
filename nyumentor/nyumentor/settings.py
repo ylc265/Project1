@@ -95,15 +95,16 @@ TEMPLATE_DIRS = [
 ]
 
 # EMAIL SETTING fro gmail or google apps
-EMAIL_USE_TLS = False
-EMAIL_HOST = 'localhost'
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
-EMAIL_PORT = 1025
-DEFAULT_FROM_EMAIL = 'testing@example.com'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'nyumentor123@gmail.com'
+EMAIL_HOST_PASSWORD = 'p1o2i3i3o2p1'
+EMAIL_PORT = 587
+
 
 # Registration Redux Settings
-REGISTRATION_OPEN = True 
+REGISTRATION_FORM = 'frontpage_users.forms.RegistrationFormNYUEmail'
+REGISTRATION_OPEN = True
 ACCOUNT_ACTIVATION_DAYS = 7
 REGISTRATION_AUTO_LOGIN = False
 LOGIN_REDIRECT_URL = '/frontpage/'

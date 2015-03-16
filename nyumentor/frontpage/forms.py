@@ -31,4 +31,15 @@ class CourseModelForm(forms.ModelForm):
 
 	class Meta:
 		model = CourseModel 
-		exclude = ()
+		exclude = ('course_user',)
+
+class SearchForm(forms.Form):
+	coursenumber = forms.CharField(required=False, widget=forms.TextInput(attrs={'placeholder': 'Course Number'}))
+	professor    = forms.CharField(required=False, widget=forms.TextInput(attrs={'placeholder': 'Professor Name'}))
+
+
+
+
+
+
+

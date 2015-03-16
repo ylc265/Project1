@@ -21,4 +21,9 @@
 		{% else %}
 			<strong> There are no course listed. </strong>
 		{% endif %}
+		<form action="/frontpage/" method="post">
+			{% csrf_token %}
+			{{ form }}
+			<input type="submit" value="Submit" />
+		</form>
 {% endblock %}

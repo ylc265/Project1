@@ -1,5 +1,6 @@
 from django.db import models
 from django.template.defaultfilters import slugify
+from frontpage_users.models import UserProfile
 # Create your models here.
 
 class Category(models.Model):
@@ -47,6 +48,7 @@ class CourseModel(models.Model):
 		('D+', 'D+'),
 		('D', 'D'),
 		('F', 'F'))
+	course_user  = models.ForeignKey(UserProfile, null=True)
 	category     = models.ForeignKey(Category)
 	coursenumber = models.CharField(max_length=128)
 	professor    = models.CharField(max_length=128)
@@ -62,4 +64,7 @@ class CourseModel(models.Model):
 		self.slug = '{}-{}'.format(slugify(self.coursenumber), slugify(self.professor))
 		self.prof_slug = slugify(self.professor)
 		super(CourseModel, self).save(*args, **kwargs)
+
+	def __str__(self):
+		return self.coursenumber + ' ' + self.professor
 
