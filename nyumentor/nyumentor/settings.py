@@ -103,7 +103,8 @@ EMAIL_PORT = 587
 
 
 # Registration Redux Settings
-REGISTRATION_FORM = 'frontpage_users.forms.RegistrationFormNYUEmail'
+REGISTRATION_FORM = 'registration.forms.RegistrationForm'
+# REGISTRATION_FORM = 'frontpage_users.forms.RegistrationFormNYUEmail'
 REGISTRATION_OPEN = True
 ACCOUNT_ACTIVATION_DAYS = 7
 REGISTRATION_AUTO_LOGIN = False
