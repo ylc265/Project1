@@ -16,26 +16,16 @@ class Category(models.Model):
 		# for a very strange reason, it's still __str__ and not 
 		# __unicode__
 		return self.name 
-'''
-class CourseNumber(models.Model):
-	name = models.CharField(max_length=128, unique=True)
 
-	def __unicode__(self):
-		return self.name 
-
-class Professor(models.Model):
-	name = models.CharField(max_length=128, unique=True)
-
-	def __unicode__(self):
-		return self.name 
-
-class CourseName(models.Model):
-	name = models.CharField(max_length=128, unique=True)
-
-	def __unicode__(self):
-		return self.name 
-'''
 class CourseModel(models.Model):
+	'''
+	This is the model for the course and includes:
+	- course prefix (example: Math_UA)
+	- course number (example: 121)
+	- course name   (example: Calculus I)
+	- professor name
+	'''
+	
 	GRADE_CHOICES = (
 		('A', 'A'),
 		('A-', 'A-'),
