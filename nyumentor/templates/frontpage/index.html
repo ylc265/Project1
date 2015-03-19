@@ -14,7 +14,7 @@
 		{% if courses %}
 			<ul>
 				{% for course in courses %}
-				<li><a href="/frontpage/courses/{{ course.slug }}"> {{ course.coursenumber }}</a> {{ course.coursename }}
+				<li><a href="/frontpage/courses/{{ course.slug }}"> {{ course.course_prefix }} {{ course.course_number }}</a> {{ course.course_name }}
 					<a href="/frontpage/professors/{{ course.prof_slug }}"> {{ course.professor }} </a></li>
 				{% endfor %}
 			</ul>

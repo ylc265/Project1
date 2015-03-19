@@ -7,30 +7,33 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
+        ('frontpage_users', '0001_initial'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Category',
+            name='CourseModel',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', auto_created=True, primary_key=True, serialize=False)),
-                ('name', models.CharField(unique=True, max_length=128, choices=[('MATH', 'Math'), ('ENG', 'English'), ('CS', 'Computer Science')])),
+                ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True, serialize=False)),
+                ('course_prefix', models.CharField(max_length=128)),
+                ('course_number', models.CharField(max_length=128)),
+                ('professor', models.CharField(max_length=128)),
+                ('course_name', models.CharField(max_length=128)),
+                ('slug', models.SlugField(unique=True)),
+                ('prof_slug', models.SlugField()),
             ],
             options={
             },
             bases=(models.Model,),
         ),
         migrations.CreateModel(
-            name='CourseModel',
+            name='StudentCourseModel',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', auto_created=True, primary_key=True, serialize=False)),
-                ('coursegrade', models.CharField(max_length=128, choices=[('A', 'A'), ('A-', 'A-'), ('B+', 'B+'), ('B', 'B'), ('B-', 'B-'), ('C+', 'C+'), ('C', 'C'), ('C-', 'C-'), ('D+', 'D+'), ('D', 'D'), ('F', 'F')])),
-                ('coursenumber', models.CharField(max_length=128)),
-                ('professor', models.CharField(max_length=128)),
-                ('coursename', models.CharField(max_length=128)),
-                ('slug', models.SlugField(unique=True)),
-                ('prof_slug', models.SlugField()),
-                ('category', models.ForeignKey(to='frontpage.Category')),
+                ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True, serialize=False)),
+                ('course_grade', models.CharField(choices=[('A', 'A'), ('A-', 'A-'), ('B+', 'B+'), ('B', 'B'), ('B-', 'B-'), ('C+', 'C+'), ('C', 'C'), ('C-', 'C-'), ('D+', 'D+'), ('D', 'D'), ('F', 'F')], max_length=128)),
+                ('verified', models.BooleanField(default=False)),
+                ('course_model', models.ForeignKey(to='frontpage.CourseModel', null=True)),
+                ('course_user', models.ForeignKey(to='frontpage_users.UserProfile', null=True)),
             ],
             options={
             },

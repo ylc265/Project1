@@ -2,7 +2,7 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from frontpage_users.models import UserProfile
 # Create your models here.
-
+'''
 class Category(models.Model):
 	CATEGORY_CHOICES = (
 		('MATH', 'Math'),
@@ -16,6 +16,7 @@ class Category(models.Model):
 		# for a very strange reason, it's still __str__ and not 
 		# __unicode__
 		return self.name 
+'''
 
 class CourseModel(models.Model):
 	'''
@@ -25,7 +26,32 @@ class CourseModel(models.Model):
 	- course name   (example: Calculus I)
 	- professor name
 	'''
-	
+	# !!! Change course_prefix, course_number to just one field
+	course_prefix = models.CharField(max_length=128)
+	course_number = models.CharField(max_length=128)
+	professor    = models.CharField(max_length=128)
+	course_name   = models.CharField(max_length=128)
+	slug = models.SlugField(max_length=128)
+	prof_slug = models.SlugField()
+	# !!! I need one more field here for Fall/Spring year taken 
+
+
+	def save(self, *args, **kwargs):
+		self.slug = '{}-{}-{}-{}'.format(slugify(self.course_prefix), slugify(self.course_number), slugify(self.course_name),slugify(self.professor))
+		self.prof_slug = slugify(self.professor)
+		super(CourseModel, self).save(*args, **kwargs)
+
+	def __str__(self):
+		return self.course_prefix + ' ' + self.course_number + ' ' + self.professor
+
+class StudentCourseModel(models.Model):
+	'''
+	This is the model for a student's experience with a course. Includes:
+	- course_user  (example: UserProfile)
+	- course       (example: CourseModel)
+	- course_grade (example: A)
+	- verified     (example: True)
+	'''
 	GRADE_CHOICES = (
 		('A', 'A'),
 		('A-', 'A-'),
@@ -39,22 +65,11 @@ class CourseModel(models.Model):
 		('D', 'D'),
 		('F', 'F'))
 	course_user  = models.ForeignKey(UserProfile, null=True)
-	category     = models.ForeignKey(Category)
-	coursenumber = models.CharField(max_length=128)
-	professor    = models.CharField(max_length=128)
-	coursename   = models.CharField(max_length=128)
-	slug = models.SlugField()
-	prof_slug = models.SlugField()
-	coursegrade  = models.CharField(max_length=128,
+	course_model = models.ForeignKey(CourseModel, null=True)
+	course_grade  = models.CharField(max_length=128,
 		choices=GRADE_CHOICES)
-	# !!! I need one more field here for Fall/Spring year taken 
-
-
-	def save(self, *args, **kwargs):
-		self.slug = '{}-{}'.format(slugify(self.coursenumber), slugify(self.professor))
-		self.prof_slug = slugify(self.professor)
-		super(CourseModel, self).save(*args, **kwargs)
+	verified = models.BooleanField(default=False)
 
 	def __str__(self):
-		return self.coursenumber + ' ' + self.professor
+		return str(self.course_model) + ' ' + str(self.course_user)
 
