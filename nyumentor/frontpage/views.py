@@ -1,3 +1,4 @@
+from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.template.defaultfilters import slugify
@@ -8,6 +9,7 @@ from frontpage_users.models import UserProfile
 
 
 def index(request):
+	authentication_form = AuthenticationForm
 	if request.method == 'POST':
 		form = SearchForm(request.POST)
 		if form.is_valid():
@@ -20,10 +22,15 @@ def index(request):
 	# Just list all the courses ordered by course number
 	course_list = CourseModel.objects.order_by('course_number')
 	form = SearchForm()
+	login_form = authentication_form(request)
 	context_dict = {'courses': course_list,
-					'form': form}
+					'form': form,
+					'login_form': login_form}
 
 	return render(request, 'frontpage/index.html', context_dict)
+
+
+
 
 def get_cpage(request, course_slug):
 	context_dict = {}
