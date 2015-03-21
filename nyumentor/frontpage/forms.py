@@ -61,10 +61,18 @@ class StudentCourseModelForm(forms.ModelForm):
 		exclude = ('course_user', 'course_model', 'verified')
 
 class SearchForm(forms.Form):
-	course_prefix = forms.CharField(required=False, widget=forms.TextInput(attrs={'placeholder': 'Course Prefix'}))
-	course_number = forms.CharField(required=False, widget=forms.TextInput(attrs={'placeholder': 'Course Number'}))
-	course_name   = forms.CharField(required=False, widget=forms.TextInput(attrs={'placeholder': 'Course Name'}))
-	professor    = forms.CharField(required=False, widget=forms.TextInput(attrs={'placeholder': 'Professor Name'}))
+	# course_prefix = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-box',
+	# 																			  'placeholder': 'Course Prefix',
+	# 																			  'size': 15,}))
+	course_number = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-input',
+																				  'placeholder': 'Course Number',
+																				  'size': 15,}))
+	# course_name   = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-box',
+	# 																			  'placeholder': 'Course Name',
+	# 																			  'size': 15,}))
+	professor    = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-input',
+																				  'placeholder': 'Professor Name',
+																				  'size': 15,}))
 
 
 

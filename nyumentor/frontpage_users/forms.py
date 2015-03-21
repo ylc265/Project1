@@ -1,8 +1,21 @@
-from django import forms 
+from django import forms
+from django.contrib.auth.forms import AuthenticationForm 
 from django.contrib.auth.models import User
 from django.utils.translation  import ugettext_lazy as _
 from registration.forms import RegistrationFormUniqueEmail
 from frontpage_users.models import UserProfile
+
+class MyAuthenticationForm(AuthenticationForm):
+	def __init__(self, *args, **kwargs):
+		super(MyAuthenticationForm, self).__init__(*args, **kwargs)
+		self.fields['username'].widget = forms.TextInput(attrs={
+														'class': 'form-box',
+														'size': 10,
+														'placeholder': 'Username'})
+		self.fields['password'].widget = forms.TextInput(attrs={
+														'class': 'form-box',
+														'size': 10,
+														'placeholder': 'Password'})
 
 class UserForm(forms.ModelForm):
 	password = forms.CharField(widget=forms.PasswordInput())

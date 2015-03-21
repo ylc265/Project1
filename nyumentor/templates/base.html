@@ -1,19 +1,85 @@
 <!DOCTYPE html>
-
+{% load i18n %}
+{% load staticfiles %}
 <html>
 	<head lang="en">
 		<meta charset="UTF-8">
 		<title>NYU Mentor - {% block title %} Frontpage {% endblock %}</title>
 		<!-- Bootstrap -->
-		<link href="../static/css/bootstrap.min.css" rel="stylesheet" media="screen">
+		<!-- <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" media="screen"> -->
+		<!-- <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+		<link href="{% static 'css/base/base.css' %}" rel="stylesheet" media="screen">
 
 	</head>
 
 	<body>
-		<div>
-			{% block content %}{% endblock %}
+		<div class="header">
+			<div class="logo">
+				<h1 style="display: inline;"> NYU Mentors</h1>
+			</div>
+			<div class="search-form-block">
+				<form class="search-form" action="/frontpage/" method="post">
+					{% csrf_token %}
+					<!-- <div class="form-group">
+						<label class="sr-only" for="{{ form.course_prefix.id_for_label }}"> Course Prefix </label>
+						{{ form.course_prefix }}
+					</div> -->
+					<div class="form-group">
+						<label class="sr-only" for="{{ form.course_number.id_for_label }}"> Course Number </label>
+						{{ form.course_number }}
+					</div>
+					<!-- <div class="form-group">
+						<label class="sr-only" for="{{ form.course_name.id_for_label }}"> Course Name </label>
+						{{ form.course_name }}
+					</div> -->
+					<div class="form-group">
+						<label class="sr-only" for="{{ form.professor.id_for_label }}"> Professor </label>
+						{{ form.professor }}
+					</div>
+					<input type="submit" class="btn btn-default" value="Search" />
+				</form>
+			</div>
+			<div class="login-form-block">
+				{% if user.is_authenticated %}
+					<a href="{% url 'auth_logout' %}">Logout</a>
+				{% else %}
+					<form class="login-form" method="post" action="/accounts/login/">
+					  {% csrf_token %} 
+					  <div class="form-group">
+					  	<label class="sr-only" for="{{ login_form.username.id_for_label }}"> Username </label>
+					  	{{ login_form.username }}
+					  </div>
+					  <div class="form-group">
+					  	<label class="sr-only" for="{{ login_form.password.id_for_label }}"> Password </label>
+					  	{{ login_form.password }}
+					  </div>				
+					  <input type="submit" class="login-button" value="{% trans 'Log in' %}" />
+					</form>
+				{% endif %}
+			</div>
 		</div>
-		<hr />
+
+		<div class="boder">
+			<div class="profile">
+				<a class="std_button" href=""><strong>My Profile</strong></a></br>
+				<a class="std_button" href=""><strong>My Account</strong></a></br>
+				<a class="std_button" href=""><strong>My Inbox</strong></a></br>
+			</div>
+			<div class="content">
+				Content
+			</div>
+			<div class="right-column">
+				Adspace
+				fadsf
+			</div>
+		</div>
+
+		<div class="footer">
+			<div class="footer-links">
+				<a href="">About</a> | <a href="">FAQ</a> | <a href="">Privacy</a>  
+			</div>
+		</div>
+		<!-- <hr />
 		<div>
 			<ul>
 				{% if user.is_authenticated %}
@@ -24,9 +90,10 @@
 					<li><a href="{% url 'auth_login' %}">Login</a></li>
 				{% endif %}
 			</ul>
-		</div>
+		</div> -->
 		<script src="http://code.jquery.com/jquery.js"></script>
-		<script src="../static/js/bootstrap.min.js"></script>
+		<!-- <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script> -->
+		<!-- <script src="{% static 'js/bootstrap.min.js' %}"></script> -->
 	</body>
 </html>
 	</body>

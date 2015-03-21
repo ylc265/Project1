@@ -1,18 +1,19 @@
-from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.template.defaultfilters import slugify
 from frontpage.models import CourseModel, StudentCourseModel
 from frontpage.forms import CourseForm, CourseModelForm, SearchForm
+from frontpage_users.forms import MyAuthenticationForm
 from frontpage_users.models import UserProfile
 # Create your views here.
 
 
 def index(request):
-	authentication_form = AuthenticationForm
+	authentication_form = MyAuthenticationForm
 	if request.method == 'POST':
 		form = SearchForm(request.POST)
 		if form.is_valid():
+			# This is the preliminary way of searching, later on I will have to refine this
 			cprefix = form.cleaned_data.get('course_prefix')
 			cnumber = form.cleaned_data.get('course_number')
 			cname   = form.cleaned_data.get('course_name')
@@ -27,7 +28,8 @@ def index(request):
 					'form': form,
 					'login_form': login_form}
 
-	return render(request, 'frontpage/index.html', context_dict)
+	# return render(request, 'frontpage/index.html', context_dict)
+	return render(request, 'base.html', context_dict)
 
 
 
