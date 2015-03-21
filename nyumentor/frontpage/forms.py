@@ -2,7 +2,7 @@ import re
 from django import forms 
 from frontpage.models import StudentCourseModel, CourseModel 
 
-course_prefix_pattern = re.compile(r'\w+-\w+', re.IGNORECASE)
+course_prefix_pattern = re.compile(r'\w+-\w+ \d+', re.IGNORECASE)
 GRADE_CHOICES = (
 		('A', 'A'),
 		('A-', 'A-'),
@@ -35,7 +35,7 @@ class CourseForm(forms.Form):
 		cleaned_data = super(CourseForm, self).clean()
 		course_prefix_valid = cleaned_data.get('course_prefix')
 		if not course_prefix_pattern.match(course_prefix_valid):
-			self._errors['course_prefix'] = self.error_class([u'Please enter the course prefix in the following format: CSCI-UA'])
+			self._errors['course_prefix'] = self.error_class([u'Please enter the course prefix in the format seen on Albert. Example: CSCI-UA 102'])
 		return cleaned_data
 
 

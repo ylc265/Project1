@@ -27,7 +27,7 @@ class CourseModel(models.Model):
 	- professor name
 	'''
 	# !!! Change course_prefix, course_number to just one field
-	course_prefix = models.CharField(max_length=128)
+	# course_prefix = models.CharField(max_length=128)
 	course_number = models.CharField(max_length=128)
 	professor    = models.CharField(max_length=128)
 	course_name   = models.CharField(max_length=128)
@@ -37,12 +37,12 @@ class CourseModel(models.Model):
 
 
 	def save(self, *args, **kwargs):
-		self.slug = '{}-{}-{}-{}'.format(slugify(self.course_prefix), slugify(self.course_number), slugify(self.course_name),slugify(self.professor))
+		self.slug = '{}-{}-{}'.format(slugify(self.course_number), slugify(self.course_name),slugify(self.professor))
 		self.prof_slug = slugify(self.professor)
 		super(CourseModel, self).save(*args, **kwargs)
 
 	def __str__(self):
-		return self.course_prefix + ' ' + self.course_number + ' ' + self.professor
+		return self.course_number + ' ' + self.professor
 
 class StudentCourseModel(models.Model):
 	'''
@@ -52,6 +52,12 @@ class StudentCourseModel(models.Model):
 	- course_grade (example: A)
 	- verified     (example: True)
 	'''
+	SEMESTER = (
+		('Spring', 'Spring'),
+		('Summer', 'Summer'),
+		('Fall', 'Fall'),
+		('Winter', 'Winter'),
+	)
 	GRADE_CHOICES = (
 		('A', 'A'),
 		('A-', 'A-'),
@@ -69,6 +75,9 @@ class StudentCourseModel(models.Model):
 	course_grade  = models.CharField(max_length=128,
 		choices=GRADE_CHOICES)
 	verified = models.BooleanField(default=False)
+	semester = models.CharField(max_length=128,
+		choices=SEMESTER)
+	year = models.PositiveSmallIntegerField(default=1, blank=False)
 
 	def __str__(self):
 		return str(self.course_model) + ' ' + str(self.course_user)

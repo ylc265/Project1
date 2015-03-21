@@ -75,6 +75,17 @@ it doesn't go down. Solution: min, max outer div; */
   width: 13em;
   float: left;
 }
+.login-form-block .logout-box{
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}
+.login-form-block .logout-box a{
+  color: black;
+}
 .login-form-block .login-form{
   /*border-style: solid;
   border-width: 2px;*/

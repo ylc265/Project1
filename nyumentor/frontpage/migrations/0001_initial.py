@@ -15,11 +15,10 @@ class Migration(migrations.Migration):
             name='CourseModel',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True, serialize=False)),
-                ('course_prefix', models.CharField(max_length=128)),
                 ('course_number', models.CharField(max_length=128)),
                 ('professor', models.CharField(max_length=128)),
                 ('course_name', models.CharField(max_length=128)),
-                ('slug', models.SlugField(unique=True)),
+                ('slug', models.SlugField(max_length=128)),
                 ('prof_slug', models.SlugField()),
             ],
             options={

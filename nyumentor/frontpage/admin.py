@@ -6,8 +6,8 @@ from frontpage_users.models import UserProfile
 # 
 
 class CourseModelAdmin(admin.ModelAdmin):
-	list_display = ('course_prefix', 'course_number', 'course_name', 'professor')
-	prepopulated_fields = {'slug':('course_prefix', 'course_number', 'professor'),
+	list_display = ('course_number', 'course_name', 'professor')
+	prepopulated_fields = {'slug':('course_number', 'professor'),
 						   'prof_slug': ('professor',)}
 
 	
