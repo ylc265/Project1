@@ -10,18 +10,22 @@ from frontpage_users.models import UserProfile
 
 def index(request):
 	authentication_form = MyAuthenticationForm
+	course_list = StudentCourseModel.objects.all()
 	if request.method == 'POST':
 		form = SearchForm(request.POST)
 		if form.is_valid():
 			# This is the preliminary way of searching, later on I will have to refine this
-			cprefix = form.cleaned_data.get('course_prefix')
 			cnumber = form.cleaned_data.get('course_number')
-			cname   = form.cleaned_data.get('course_name')
 			professor = form.cleaned_data.get('professor')
-			slug = '{}-{}-{}-{}'.format(slugify(cprefix), slugify(cnumber), slugify(cname), slugify(professor))
-			return get_cpage(request, slug)
+			# slug = '{}-{}-{}-{}'.format(slugify(cprefix), slugify(cnumber), slugify(cname), slugify(professor))
+			if cnumber!='' and professor !='':
+				course_model = CourseModel.objects.filter(course_number=cnumber, professor=professor)
+			elif cnumber !='':
+				course_model = CourseModel.objects.filter(course_number=cnumber)
+			elif professor !='':
+				course_model = CourseModel.objects.filter(professor=professor)
+			course_list = StudentCourseModel.objects.filter(course_model=course_model)
 	# Just list all the courses ordered by course number
-	course_list = CourseModel.objects.order_by('course_number')
 	form = SearchForm()
 	login_form = authentication_form(request)
 	context_dict = {'courses': course_list,

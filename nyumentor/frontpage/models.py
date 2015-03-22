@@ -1,3 +1,4 @@
+import datetime
 from django.db import models
 from django.template.defaultfilters import slugify
 from frontpage_users.models import UserProfile
@@ -78,6 +79,7 @@ class StudentCourseModel(models.Model):
 	semester = models.CharField(max_length=128,
 		choices=SEMESTER)
 	year = models.PositiveSmallIntegerField(default=1, blank=False)
+	pub_date = models.DateTimeField('date published', default=datetime.datetime.now)
 
 	def __str__(self):
 		return str(self.course_model) + ' ' + str(self.course_user)

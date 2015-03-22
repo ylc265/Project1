@@ -127,6 +127,7 @@ it doesn't go down. Solution: min, max outer div; */
   /*height: 100%; */
   height: 50em;
   /*clear: both;*/
+  padding-top: 1em;
 }
 .std_button {
   display: inline-block;
@@ -149,14 +150,87 @@ it doesn't go down. Solution: min, max outer div; */
   /*text-align:justify;*/
 }
 .content{
-  border-style: solid;
-  border-width: 2px;
+  /*border-style: solid;
+  border-width: 2px;*/
 	background-color: #eeeeee;
   display: block;
   float: left;
   width: 38em;
   /*height: 100%; */
   height: 50em;
+  position: relative;
+  padding-top: 1em;
+  overflow: scroll;
+}
+.content .entryblock{
+  /*background-color: purple;*/
+  border: none;
+  border-radius: 2px;
+  box-shadow: 0px 0px 1px rgba(0,0,0,0.01), 0px 0px 0px 200px rgba(255,255,255,0.05) inset, 1px 1px 1px 0px rgba(0,0,0,0.2),  -1px -1px 1px 0px rgba(255,255,255,0.3);
+  text-shadow: 0px 0px 1px rgba(0,0,0,0.01), 1px 1px 2px #fff, -1px -1px 2px rgba(0,0,0,0.15);
+  display: block;
+  height: 10em;
+  width: 80%;
+  /*position: absolute;*/
+  /*margin-right: -50%;*/
+  margin-left: 10%;
+  margin-bottom: 1%;
+  /*position: absolute;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);*/
+
+}
+.content .entryblock .user-block{
+  /*border-style: solid;
+  border-width: 2px;*/
+  width: 5em;
+  float:left;
+  height: 95%;
+}
+.content .entryblock .user-block .user-image{
+  /*float:left;*/
+  margin-top: 50%;
+  margin-left: 0.5em;
+  height: 4em;
+  width: 4em;
+}
+.content .entryblock .user-block .user-link{
+  text-align:center;
+}
+
+.content .entryblock .course-block{
+  /*border-style: solid;
+  border-width: 2px;*/
+  margin-top: 0.5em;
+  margin-left: 1em;
+  width: 18em;
+  height: 95%;
+  float:left;
+  overflow:hidden;
+}
+.content .entryblock .course-block .course-layout{
+  /*border-style: solid;
+  border-width: 2px;*/
+  width:100%;
+}
+.content .entryblock .course-block .course-layout tr{
+  /*border-style: solid;
+  border-width: 2px;*/
+}
+.content .entryblock .course-block .course-layout tr td:first-child{
+ /* border-style: solid;
+  border-width: 2px;*/
+  font-size: 1em;
+  width:45%;
+
+}
+.content .entryblock .user-interaction{
+  /*border-style: solid;
+  border-width: 2px;*/
+  margin-top: 0.5em;
+  width: 5em;
+  height: 95%;
+  float:left;
 }
 .right-column{
   background-color: #eeeeee;

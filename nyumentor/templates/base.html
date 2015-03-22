@@ -20,6 +20,7 @@
 			<div class="search-form-block">
 				<form class="search-form" action="/frontpage/" method="post">
 					{% csrf_token %}
+					<!-- {{ form.errors }} Doesn't seem to work -->
 					<!-- <div class="form-group">
 						<label class="sr-only" for="{{ form.course_prefix.id_for_label }}"> Course Prefix </label>
 						{{ form.course_prefix }}
@@ -69,11 +70,66 @@
 				<a class="std_button" href=""><strong>My Inbox</strong></a></br>
 			</div>
 			<div class="content">
-				Content
+				{% block content %}
+
+				{% if courses %}
+					{% for course in courses %}
+					<div class="entryblock">
+						<div class="user-block">
+							{% if course.user.picture %}
+								<img class="user-image" src="{{ course.user.picture }}" alt="User-pic">
+							{% else %}
+								<img class="user-image" src="{% static 'img/default-avatar.png' %}" alt="User-pic">
+							{% endif %}
+							<div class="user-link">{{ course.course_user }}</div>
+						</div>
+						<div class="course-block">
+							<table class="course-layout">
+								<tr>
+									<td>Course Number: </td>
+									<td>{{ course.course_model.course_number }}</td>
+								</tr>
+								<tr>
+									<td>Course Name: </td>
+									<td>{{ course.course_model.course_name }}</td>
+								</tr>
+								<tr>
+									<td>Professor Name: </td>
+									<td>{{ course.course_model.professor }}</td>
+								</tr>
+								<tr>
+									<td>Grade Received: </td>
+									<td>{{ course.course_grade }}</td>
+								</tr>
+								<tr>
+									<td>Semester Taken: </td>
+									<td>{{ course.semester }}, {{ course.year }}</td>
+								</tr>
+								<tr>
+									<td>Verified: </td>
+									<td>{{ course.verified }}</td>
+								</tr>
+							</table>
+						<!-- <a href="/frontpage/courses/{{ course.slug }}">{{ course.course_model.course_number }}</a> {{ course.course_model.course_name }}<a href="/frontpage/professors/{{ course.prof_slug }}"> {{ course.course_model.professor }} </a> -->
+						</div>
+						<div class="user-interaction">
+							<a class="std_button" href=""><strong>Request</strong></a></br>
+							<a class="std_button" href=""><strong>Message</strong></a></br>
+							<a class="std_button" href=""><strong>Rating</strong></a></br>
+							<!-- <a class="std_button" href=""><strong>Course</strong></a></br> -->
+						</div>
+
+					</div>
+					{% endfor %}
+					<br/>
+				{% else %}
+					<strong> There are no course listed. </strong>
+				{% endif %}
+
+				{% endblock %}
 			</div>
 			<div class="right-column">
 				Adspace
-				fadsf
 			</div>
 		</div>
 

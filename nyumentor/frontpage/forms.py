@@ -73,6 +73,12 @@ class SearchForm(forms.Form):
 	professor    = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-input',
 																				  'placeholder': 'Professor Name',
 																				  'size': 15,}))
+	def clean(self):
+		cleaned_data = super(SearchForm, self).clean()
+		if cleaned_data['course_number'] == '' and cleaned_data['professor'] == '':
+			self._errors['course_number'] = self.error_class([u'Please enter something'])
+		return cleaned_data
+
 
 
 
