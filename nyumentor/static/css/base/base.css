@@ -150,8 +150,8 @@ it doesn't go down. Solution: min, max outer div; */
   /*text-align:justify;*/
 }
 .content{
-  /*border-style: solid;
-  border-width: 2px;*/
+  border-style: solid;
+  border-width: 2px;
 	background-color: #eeeeee;
   display: block;
   float: left;

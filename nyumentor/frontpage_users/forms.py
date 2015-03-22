@@ -12,7 +12,7 @@ class MyAuthenticationForm(AuthenticationForm):
 														'class': 'form-box',
 														'size': 10,
 														'placeholder': 'Username'})
-		self.fields['password'].widget = forms.TextInput(attrs={
+		self.fields['password'].widget = forms.PasswordInput(attrs={
 														'class': 'form-box',
 														'size': 10,
 														'placeholder': 'Password'})

@@ -96,7 +96,16 @@ TEMPLATE_PATH = os.path.join(BASE_DIR, 'templates')
 TEMPLATE_DIRS = [
     TEMPLATE_PATH,
 ]
-
+TEMPLATE_CONTEXT_PROCESSORS =(
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.tz",
+    "django.contrib.messages.context_processors.messages",
+    "frontpage.context_processors.main_proc",
+)
 # EMAIL SETTING fro gmail or google apps
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'

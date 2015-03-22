@@ -9,13 +9,15 @@
 		<!-- <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" media="screen"> -->
 		<!-- <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet"> -->
 		<link href="{% static 'css/base/base.css' %}" rel="stylesheet" media="screen">
+		{% block extraheader %}
+		{% endblock %}
 
 	</head>
 
 	<body>
 		<div class="header">
 			<div class="logo">
-				<h1 style="display: inline;"> NYU Mentors</h1>
+				<a href="{% url 'frontpage:home' %}"><h1 style="display: inline;"> NYU Mentors</h1></a>
 			</div>
 			<div class="search-form-block">
 				<form class="search-form" action="/frontpage/" method="post">
@@ -65,7 +67,7 @@
 
 		<div class="boder">
 			<div class="profile">
-				<a class="std_button" href=""><strong>My Profile</strong></a></br>
+				<a class="std_button" href="{% url 'users:profile' %}"><strong>My Profile</strong></a></br>
 				<a class="std_button" href=""><strong>My Account</strong></a></br>
 				<a class="std_button" href=""><strong>My Inbox</strong></a></br>
 			</div>
@@ -138,18 +140,7 @@
 				<a href="">About</a> | <a href="">FAQ</a> | <a href="">Privacy</a>  
 			</div>
 		</div>
-		<!-- <hr />
-		<div>
-			<ul>
-				{% if user.is_authenticated %}
-					<li><a href="{% url 'auth_logout' %}">Logout</a></li>
-					<li><a href="{% url 'add_course'%}">Add a New Course</a></li>
-				{% else %}
-					<li><a href="{% url 'registration_register' %}">Register Here</a></li>
-					<li><a href="{% url 'auth_login' %}">Login</a></li>
-				{% endif %}
-			</ul>
-		</div> -->
+		
 		<script src="http://code.jquery.com/jquery.js"></script>
 		<!-- <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script> -->
 		<!-- <script src="{% static 'js/bootstrap.min.js' %}"></script> -->

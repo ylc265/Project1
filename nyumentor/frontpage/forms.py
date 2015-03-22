@@ -2,7 +2,7 @@ import re
 from django import forms 
 from frontpage.models import StudentCourseModel, CourseModel 
 
-course_prefix_pattern = re.compile(r'\w+-\w+ \d+', re.IGNORECASE)
+course_number_pattern = re.compile(r'\w+-\w+ \d+', re.IGNORECASE)
 GRADE_CHOICES = (
 		('A', 'A'),
 		('A-', 'A-'),
@@ -15,6 +15,12 @@ GRADE_CHOICES = (
 		('D+', 'D+'),
 		('D', 'D'),
 		('F', 'F'))
+SEMESTER = (
+		('Spring', 'Spring'),
+		('Summer', 'Summer'),
+		('Fall', 'Fall'),
+		('Winter', 'Winter'),
+	)
 
 class CourseForm(forms.Form):
 	'''
@@ -23,19 +29,20 @@ class CourseForm(forms.Form):
 	'''
 	slug = forms.CharField(widget=forms.HiddenInput(), required=False)
 	prof_slug = forms.CharField(widget=forms.HiddenInput(), required=False)
-	course_prefix = forms.CharField(max_length=128, help_text="Enter Course Prefix: ")
+	# course_prefix = forms.CharField(max_length=128, help_text="Enter Course Prefix: ")
 	course_number = forms.CharField(max_length=128, help_text="Enter Course Number: ")
 	professor    = forms.CharField(max_length=128, help_text="Enter Professor's Full Name: ")
 	course_name   = forms.CharField(max_length=128, help_text="Enter Course's Name: ")
 	course_grade  = forms.ChoiceField(help_text="Enter Grade Received: ", choices = GRADE_CHOICES)
-
+	semester  = forms.ChoiceField(help_text="Enter Semester Taken: ", choices = SEMESTER)
+	year = forms.IntegerField(help_text="Enter Year Taken: ", min_value=1900, max_value=2200)
 	# !!! In the future, maybe regular expression for the input. For example, CS_UA, must always
 	# follow a standard.
 	def clean(self):
 		cleaned_data = super(CourseForm, self).clean()
-		course_prefix_valid = cleaned_data.get('course_prefix')
-		if not course_prefix_pattern.match(course_prefix_valid):
-			self._errors['course_prefix'] = self.error_class([u'Please enter the course prefix in the format seen on Albert. Example: CSCI-UA 102'])
+		course_number_valid = cleaned_data.get('course_number')
+		if not course_number_pattern.match(course_number_valid):
+			self._errors['course_number'] = self.error_class([u'Please enter the course number in the format seen on Albert. Example: CSCI-UA 102'])
 		return cleaned_data
 
 

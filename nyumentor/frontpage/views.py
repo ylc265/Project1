@@ -1,6 +1,8 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.template import RequestContext
 from django.template.defaultfilters import slugify
+from frontpage.context_processors import main_proc
 from frontpage.models import CourseModel, StudentCourseModel
 from frontpage.forms import CourseForm, CourseModelForm, SearchForm
 from frontpage_users.forms import MyAuthenticationForm
@@ -33,7 +35,8 @@ def index(request):
 					'login_form': login_form}
 
 	# return render(request, 'frontpage/index.html', context_dict)
-	return render(request, 'base.html', context_dict)
+	return render(request, 'base.html', {'courses':course_list,},
+		context_instance=RequestContext(request, [main_proc]))
 
 
 
@@ -77,11 +80,12 @@ def add_course(request):
 			form = CourseForm(request.POST)
 
 			if form.is_valid():
-				course_prefix = form.cleaned_data['course_prefix']
 				course_number = form.cleaned_data['course_number']
 				professor     = form.cleaned_data['professor']
 				course_name   = form.cleaned_data['course_name']
 				course_grade  = form.cleaned_data['course_grade']
+				semester      = form.cleaned_data['semester']
+				year          = form.cleaned_data['year']
 
 				course_model = CourseModel.objects.get_or_create(
 					course_prefix = course_prefix,
@@ -94,7 +98,9 @@ def add_course(request):
 				StudentCourseModel.objects.get_or_create(
 					course_user = course_user,
 					course_model = course_model,
-					course_grade = course_grade)
+					course_grade = course_grade,
+					semester = semester,
+					year = year)
 
 
 

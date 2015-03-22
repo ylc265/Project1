@@ -7,7 +7,7 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^frontpage/', include('frontpage.urls')),
-    url(r'^frontpage_users/', include('frontpage_users.urls')),
+    url(r'^frontpage/', include('frontpage.urls', namespace='frontpage')),
+    url(r'^frontpage_users/', include('frontpage_users.urls', namespace='users')),
     url(r'^accounts/', include('registration.backends.default.urls')),
 )

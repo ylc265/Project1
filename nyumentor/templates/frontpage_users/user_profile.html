@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load staticfiles %}
+
+{% block extraheader %}
+	<link href="{% static 'css/frontpage-users/user_profile.css' %}" rel="stylesheet" media="screen">
+{% endblock %}
+{% block content %}
+	{% if user.is_authenticated %}
+		<div class="profile-information">
+			<div class="user-picture">
+				{% if profile.user.picture %}
+					<img class="image" src="{{ profile.user.picture }}" alt="User-pic"> 
+				{% else %}
+					<img class="image" src="{% static 'img/default-avatar.png' %}" alt="User-pic">
+				{% endif %}
+			</div>
+			<div class="user-information">
+			</div>
+			
+		</div>
+		<div class="course-bucket">
+			<div class="course-offering">
+				{% for course in course_list %}
+					{{ course.course_model.course_number }}<br>
+				{% endfor %}
+			</div>
+			<div class="course-requesting">
+			</div>
+			<div class="add-course">
+				<form id="course_form" method="post" action="/frontpage/add_course/">
+					{% csrf_token %}
+					{% for hidden in course_form.hidden_fields %}
+						{{ hidden }}
+					{% endfor %}
+
+					{% for field in course_form.visible_fields %}
+						{{ field.errors }}
+						{{ field.help_text }}
+						{{ field }}
+						<br />
+					{% endfor %}
+
+					<input type="submit" name="submit" value="Create Course" />
+				</form>
+			</div>
+		</div>
+	{% else %}
+		Go Away
+	{% endif %}
+{% endblock %}
