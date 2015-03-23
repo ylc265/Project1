@@ -1,14 +1,22 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.template import RequestContext
-from django.template.defaultfilters import slugify
+from django.views.decorators.csrf import csrf_exempt
 from frontpage.context_processors import main_proc
 from frontpage.models import CourseModel, StudentCourseModel
-from frontpage.forms import CourseForm, CourseModelForm, SearchForm
+from frontpage.forms import CourseForm, SearchForm
 from frontpage_users.forms import MyAuthenticationForm
 from frontpage_users.models import UserProfile
+from frontpage_users.views import user_profile
 # Create your views here.
 
+
+'''
+REMEMBER
+TO
+FIX
+delete_course!!!
+'''
 
 def index(request):
 	authentication_form = MyAuthenticationForm
@@ -30,9 +38,9 @@ def index(request):
 	# Just list all the courses ordered by course number
 	form = SearchForm()
 	login_form = authentication_form(request)
-	context_dict = {'courses': course_list,
-					'form': form,
-					'login_form': login_form}
+	# context_dict = {'courses': course_list,
+	# 				'form': form,
+	# 				'login_form': login_form}
 
 	# return render(request, 'frontpage/index.html', context_dict)
 	return render(request, 'base.html', {'courses':course_list,},
@@ -88,7 +96,6 @@ def add_course(request):
 				year          = form.cleaned_data['year']
 
 				course_model = CourseModel.objects.get_or_create(
-					course_prefix = course_prefix,
 					course_number = course_number,
 					professor = professor,
 					course_name = course_name)[0]
@@ -111,13 +118,26 @@ def add_course(request):
 				form_object.save()
 				'''
 				# return index(request)
-				return HttpResponseRedirect('/frontpage/')
+				return HttpResponseRedirect('/frontpage_users/user_profile')
 			else:
 				print(form.errors) 
 		else:
 			form = CourseForm()
 
-		return render(request, 'frontpage/add_course.html', {'form': form})
+		return user_profile(request)
 	else:
 		return index(request)
+
+'''
+OKAY REMEMBER TO DEFINITELY NOT USE THIS IN PRODUCTION!!! THIS IS A QUICK FIX FOR THE PROTOTYPE
+'''
+@csrf_exempt
+def delete_course(request):
+	if request.is_ajax():
+		pk = int(request.POST['course_id'])
+		course = StudentCourseModel.objects.get(pk=pk)
+		print(course)
+		course.delete()
+		return HttpResponseRedirect('/frontpage_users/user_profile')
+	print(type(request.POST['course_id']))
 
