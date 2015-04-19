@@ -29,16 +29,16 @@
 					</div> -->
 					<div class="form-group">
 						<label class="sr-only" for="{{ form.course_number.id_for_label }}"> Course Number </label>
-						{{ form.course_number }}
+						<div id="bloodhound"> {{ search_form.q }} </div>
 					</div>
 					<!-- <div class="form-group">
 						<label class="sr-only" for="{{ form.course_name.id_for_label }}"> Course Name </label>
 						{{ form.course_name }}
 					</div> -->
-					<div class="form-group">
+					<!-- <div class="form-group">
 						<label class="sr-only" for="{{ form.professor.id_for_label }}"> Professor </label>
 						{{ form.professor }}
-					</div>
+					</div> -->
 					<input type="submit" class="btn btn-default" value="Search" />
 				</form>
 			</div>
@@ -78,8 +78,8 @@
 					{% for course in courses %}
 					<div class="entryblock">
 						<div class="user-block">
-							{% if course.user.picture %}
-								<img class="user-image" src="{{ course.user.picture }}" alt="User-pic">
+							{% if course.course_user.picture %}
+								<img class="user-image" src="{{ course.course_user.picture.url }}" alt="User-pic">
 							{% else %}
 								<img class="user-image" src="{% static 'img/default-avatar.png' %}" alt="User-pic">
 							{% endif %}
@@ -144,6 +144,9 @@
 		<script src="http://code.jquery.com/jquery.js"></script>
 		<!-- <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script> -->
 		<!-- <script src="{% static 'js/bootstrap.min.js' %}"></script> -->
+		<script src="//cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.2/bloodhound.min.js"></script>
+	 	<script src="//cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.2/typeahead.bundle.min.js"></script>
+	 	<script src="{% static 'js/autocomplete/course_search.js' %}"></script>
 		{% block script_footer %}
 		{% endblock %}
 	</body>

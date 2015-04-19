@@ -1,0 +1,14 @@
+{% autoescape off %}
+
+[
+{% for result in autocourseresults %}
+	{% if not forloop.last %}
+		{"course_number": "{{ result.course_number }}"},
+	{% endif %}
+	{% if forloop.last %}
+		{"course_number": "{{ result.course_number }}"}
+	{% endif %}
+{% endfor %}
+]
+
+{% endautoescape %}

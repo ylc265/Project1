@@ -4,7 +4,7 @@ from django.template import RequestContext
 from django.views.decorators.csrf import csrf_exempt
 from frontpage.context_processors import main_proc
 from frontpage.models import CourseModel, StudentCourseModel
-from frontpage.forms import CourseForm, SearchForm
+from frontpage.forms import CourseForm, StyledSearchForm
 from frontpage_users.forms import MyAuthenticationForm
 from frontpage_users.models import UserProfile
 from frontpage_users.views import user_profile
@@ -36,8 +36,8 @@ def index(request):
 				course_model = CourseModel.objects.filter(professor=professor)
 			course_list = StudentCourseModel.objects.filter(course_model=course_model)
 	# Just list all the courses ordered by course number
-	form = SearchForm()
-	login_form = authentication_form(request)
+	# form = SearchForm()
+	# login_form = authentication_form(request)
 	# context_dict = {'courses': course_list,
 	# 				'form': form,
 	# 				'login_form': login_form}
@@ -136,8 +136,30 @@ def delete_course(request):
 	if request.is_ajax():
 		pk = int(request.POST['course_id'])
 		course = StudentCourseModel.objects.get(pk=pk)
-		print(course)
+		# print(course)
 		course.delete()
 		return HttpResponseRedirect('/frontpage_users/user_profile')
 	print(type(request.POST['course_id']))
 
+
+def autocomplete_course_search(request):
+	searchqueryset=None
+	load_all = True
+	# if request.get('q') and request.get('autocomplete'):
+	print('hi')
+	print(request.GET)
+	autocomplete_form = StyledSearchForm(request.GET,
+										 searchqueryset=searchqueryset,
+										 load_all=load_all)
+	if autocomplete_form.is_valid():
+		print('valid')
+		auto = autocomplete_form.cleaned_data['q']
+		autoresults=autocomplete_form.search()
+		autocourseresults = []
+		print(autoresults)
+		for result in autoresults:
+			if type(result.object) is CourseModel:
+				autocourseresults.append(result.object)
+		return render(request, 'search/autocomplete_course.html',{
+				'autocourseresults': autocourseresults,
+			})

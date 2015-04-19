@@ -1,0 +1,2 @@
+{{ object.course_number }}
+{{ object.professor }}

@@ -46,6 +46,7 @@ it doesn't go down. Solution: min, max outer div; */
   height: 4em;
   width: 37.5em;
   float: left;
+  z-index: 1;
 }
 .search-form-block .search-form{
  /* border-style: solid;
@@ -66,6 +67,14 @@ it doesn't go down. Solution: min, max outer div; */
 .search-form-block .search-form .form-group .form-input{
   size: 30;
 }
+
+/* This part is for twitter typeahead */
+.twitter-typeahead .tt-dropdown-menu{
+  background-color:white;
+  height: 40px;
+  overflow: scroll;
+}
+
 .login-form-block{
   position: relative;
   /*border-style: solid;
@@ -150,8 +159,8 @@ it doesn't go down. Solution: min, max outer div; */
   /*text-align:justify;*/
 }
 .content{
-  border-style: solid;
-  border-width: 2px;
+  /*border-style: solid;
+  border-width: 2px;*/
 	background-color: #eeeeee;
   display: block;
   float: left;

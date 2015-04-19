@@ -1,5 +1,7 @@
 import re
 from django import forms 
+from django.utils.translation import ugettext_lazy as _ 
+from haystack.forms import SearchForm
 from frontpage.models import StudentCourseModel, CourseModel 
 
 course_number_pattern = re.compile(r'\w+-\w+ \d+', re.IGNORECASE)
@@ -67,29 +69,30 @@ class StudentCourseModelForm(forms.ModelForm):
 		model = StudentCourseModel 
 		exclude = ('course_user', 'course_model', 'verified')
 
-class SearchForm(forms.Form):
-	# course_prefix = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-box',
-	# 																			  'placeholder': 'Course Prefix',
-	# 																			  'size': 15,}))
-	course_number = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-input',
+# class SearchForm(forms.Form):
+# 	# course_prefix = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-box',
+# 	# 																			  'placeholder': 'Course Prefix',
+# 	# 																			  'size': 15,}))
+# 	course_number = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-input typeahead',
+# 																				  'autocomplete': 'off',
+# 																				  'placeholder': 'Course Number',
+# 																				  'size': 15,}))
+# 	# course_name   = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-box',
+# 	# 																			  'placeholder': 'Course Name',
+# 	# 																			  'size': 15,}))
+# 	professor    = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-input typeahead',
+# 																				 'autocomplete': 'off',
+# 																				  'placeholder': 'Professor Name',
+# 																				  'size': 15,}))
+# 	def clean(self):
+# 		cleaned_data = super(SearchForm, self).clean()
+# 		if cleaned_data['course_number'] == '' and cleaned_data['professor'] == '':
+# 			self._errors['course_number'] = self.error_class([u'Please enter something'])
+# 		return cleaned_data
+
+class StyledSearchForm(SearchForm):
+	q = forms.CharField(required=False, label=_('Search'), widget=forms.TextInput(attrs={'class': 'form-input typeahead',
+																				  'autocomplete': 'off',
 																				  'placeholder': 'Course Number',
 																				  'size': 15,}))
-	# course_name   = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-box',
-	# 																			  'placeholder': 'Course Name',
-	# 																			  'size': 15,}))
-	professor    = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-input',
-																				  'placeholder': 'Professor Name',
-																				  'size': 15,}))
-	def clean(self):
-		cleaned_data = super(SearchForm, self).clean()
-		if cleaned_data['course_number'] == '' and cleaned_data['professor'] == '':
-			self._errors['course_number'] = self.error_class([u'Please enter something'])
-		return cleaned_data
-
-
-
-
-
-
-
 

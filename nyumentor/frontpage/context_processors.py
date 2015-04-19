@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from frontpage.forms import SearchForm
+from frontpage.forms import StyledSearchForm
 from frontpage_users.forms import MyAuthenticationForm
 
 def main_proc(request):
 	authentication_form = MyAuthenticationForm
-	form = SearchForm()
+	form = StyledSearchForm()
 	login_form = authentication_form(request)
 	return {
-		'form':form,
+		'search_form':form,
 		'login_form': login_form
 	}

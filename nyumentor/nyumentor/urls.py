@@ -10,4 +10,5 @@ urlpatterns = patterns('',
     url(r'^frontpage/', include('frontpage.urls', namespace='frontpage')),
     url(r'^frontpage_users/', include('frontpage_users.urls', namespace='users')),
     url(r'^accounts/', include('registration.backends.default.urls')),
+    url(r'^search/', include('haystack.urls')),
 )

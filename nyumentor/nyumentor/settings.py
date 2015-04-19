@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'frontpage',
     'frontpage_users',
+    'haystack',
     'registration',
 )
 
@@ -69,6 +70,18 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+
+# Haystack connection
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
+        'URL': 'http://127.0.0.1:8983/solr'
+        # ...or for multicore...
+        # 'URL': 'http://127.0.0.1:8983/solr/mysite',
+    },
+}
+
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
