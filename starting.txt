@@ -1,1 +1,4 @@
+# start postgres
 pg_ctl -D /usr/local/var/postgres -l /usr/local/v/postgres/server.log start
+# start solr
+java -jar solr-4.10.2/example/start.jar
