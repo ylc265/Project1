@@ -40,6 +40,8 @@ INSTALLED_APPS = (
     'frontpage_users',
     'haystack',
     'registration',
+    'pagination',
+    'postman',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -50,6 +52,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'pagination.middleware.PaginationMiddleware',
 )
 
 ROOT_URLCONF = 'nyumentor.urls'
@@ -63,9 +66,9 @@ WSGI_APPLICATION = 'nyumentor.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
-        'USER': 'ylc265',
-        'PASSWORD': 'password',
+        'NAME': 'nyumentor1',
+        'USER': 'thomaswall',
+        'PASSWORD': 'rhoads123',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
@@ -118,6 +121,7 @@ TEMPLATE_CONTEXT_PROCESSORS =(
     "django.core.context_processors.tz",
     "django.contrib.messages.context_processors.messages",
     "frontpage.context_processors.main_proc",
+    "django.core.context_processors.request",
 )
 # EMAIL SETTING fro gmail or google apps
 EMAIL_USE_TLS = True
@@ -135,3 +139,5 @@ ACCOUNT_ACTIVATION_DAYS = 7
 REGISTRATION_AUTO_LOGIN = False
 LOGIN_REDIRECT_URL = '/frontpage/'
 LOGIN_URL = '/accounts/login/'
+
+POSTMAN_AUTO_MODERATE_AS = True
