@@ -50,7 +50,7 @@
 					</div>
 				{% else %}
 					<form class="login-form" method="post" action="/accounts/login/">
-					  {% csrf_token %} 
+					  {% csrf_token %}
 					  <div class="form-group">
 					  	<label class="sr-only" for="{{ login_form.username.id_for_label }}"> Username </label>
 					  	{{ login_form.username }}
@@ -58,7 +58,7 @@
 					  <div class="form-group">
 					  	<label class="sr-only" for="{{ login_form.password.id_for_label }}"> Password </label>
 					  	{{ login_form.password }}
-					  </div>				
+					  </div>
 					  <input type="submit" class="login-button" value="{% trans 'Log in' %}" />
 					</form>
 				{% endif %}
@@ -69,7 +69,7 @@
 			<div class="profile">
 				<a class="std_button" href="{% url 'users:profile' %}"><strong>My Profile</strong></a></br>
 				<a class="std_button" href=""><strong>My Account</strong></a></br>
-				<a class="std_button" href=""><strong>My Inbox</strong></a></br>
+				<a class="std_button" href="http://127.0.0.1:8000/messages/inbox/"><strong>My Inbox</strong></a></br>
 			</div>
 			<div class="content">
 				{% block content %}
@@ -137,10 +137,10 @@
 
 		<div class="footer">
 			<div class="footer-links">
-				<a href="">About</a> | <a href="">FAQ</a> | <a href="">Privacy</a>  
+				<a href="">About</a> | <a href="">FAQ</a> | <a href="">Privacy</a>
 			</div>
 		</div>
-		
+
 		<script src="http://code.jquery.com/jquery.js"></script>
 		<!-- <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script> -->
 		<!-- <script src="{% static 'js/bootstrap.min.js' %}"></script> -->
