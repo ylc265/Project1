@@ -11,4 +11,5 @@ urlpatterns = patterns('',
     url(r'^frontpage_users/', include('frontpage_users.urls', namespace='users')),
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^search/', include('haystack.urls')),
+    url(r'^messages/', include('postman.urls')),
 )
