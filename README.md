@@ -30,7 +30,7 @@ Initialize:
 
 Run Postgres:
 
-`pg_ctl -D /usr/local/var/postgres -l /sur/local/v/postgres/server.log start`
+`pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start`
 
 Create database:
 
