@@ -6,6 +6,9 @@ from frontpage.forms import CourseForm
 from frontpage.models import CourseModel, StudentCourseModel
 from frontpage_users.forms import UserForm, UserProfileForm 
 from frontpage_users.models import UserProfile
+from rest_framework import viewsets
+from django.contrib.auth.models import User
+from frontpage_users.serializers import UserSerializer
 
 def user_profile(request):
 	context_dict = {}
@@ -46,3 +49,6 @@ def user_profile(request):
 		context_dict
 	)
 
+class UserViewSet(viewsets.ReadOnlyModelViewSet):
+	queryset = User.objects.all()
+	serializer_class = UserSerializer

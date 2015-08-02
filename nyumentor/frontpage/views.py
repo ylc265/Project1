@@ -1,10 +1,15 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render
 from django.template import RequestContext
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework import viewsets
 from frontpage.context_processors import main_proc
 from frontpage.models import CourseModel, StudentCourseModel
 from frontpage.forms import CourseForm, StyledSearchForm
+from frontpage.serializers import StudentCourseModelSerializer
 from frontpage_users.forms import MyAuthenticationForm
 from frontpage_users.models import UserProfile
 from frontpage_users.views import user_profile
@@ -163,3 +168,16 @@ def autocomplete_course_search(request):
 		return render(request, 'search/autocomplete_course.html',{
 				'autocourseresults': autocourseresults,
 			})
+
+class StudentCourseModelList(APIView):
+
+	def get(self, request, format=None):
+		scm = StudentCourse.objects.all()
+		serializer = StudentCourseModelSerializer(scm, many=True)
+		return Response(serializer.data)
+
+class StudentCourseViewSet(viewsets.ModelViewSet):
+	queryset = StudentCourseModel.objects.all()
+	serializer_class = StudentCourseModelSerializer
+
+

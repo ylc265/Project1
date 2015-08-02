@@ -40,6 +40,8 @@ INSTALLED_APPS = (
     'frontpage_users',
     'haystack',
     'registration',
+    'rest_framework',
+    'rest_framework.authtoken',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -135,3 +137,11 @@ ACCOUNT_ACTIVATION_DAYS = 7
 REGISTRATION_AUTO_LOGIN = False
 LOGIN_REDIRECT_URL = '/frontpage/'
 LOGIN_URL = '/accounts/login/'
+
+# Rest Framework settings
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    )
+}
